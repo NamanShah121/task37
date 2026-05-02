@@ -7,14 +7,18 @@ function WorkoutDetails({ workout }) {
   const { dispatch } = useWorkouts();
 
   const handleClick = async () => {
-    const response = await fetch(`${apiUrl}/api/workouts/${workout._id}`, {
-      method: "DELETE"
-    });
+    try {
+      const response = await fetch(`${apiUrl}/api/workouts/${workout._id}`, {
+        method: "DELETE"
+      });
 
-    const json = await response.json();
+      const json = await response.json();
 
-    if (response.ok) {
-      dispatch({ type: "DELETE_WORKOUT", payload: json });
+      if (response.ok) {
+        dispatch({ type: "DELETE_WORKOUT", payload: json });
+      }
+    } catch (err) {
+      console.log("delete failed");
     }
   };
 

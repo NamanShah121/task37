@@ -10,34 +10,43 @@ function WorkoutForm() {
   const [reps, setReps] = useState("");
   const [error, setError] = useState(null);
   const [emptyFields, setEmptyFields] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const workout = { title, load, reps };
+    setIsLoading(true);
 
-    const response = await fetch(`${apiUrl}/api/workouts`, {
-      method: "POST",
-      body: JSON.stringify(workout),
-      headers: {
-        "Content-Type": "application/json"
+    try {
+      const response = await fetch(`${apiUrl}/api/workouts`, {
+        method: "POST",
+        body: JSON.stringify(workout),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+
+      const json = await response.json();
+
+      if (!response.ok) {
+        setError(json.error || "Could not add workout");
+        setEmptyFields(json.emptyFields || []);
       }
-    });
 
-    const json = await response.json();
-
-    if (!response.ok) {
-      setError(json.error);
-      setEmptyFields(json.emptyFields || []);
-    }
-
-    if (response.ok) {
-      setTitle("");
-      setLoad("");
-      setReps("");
-      setError(null);
+      if (response.ok) {
+        setTitle("");
+        setLoad("");
+        setReps("");
+        setError(null);
+        setEmptyFields([]);
+        dispatch({ type: "CREATE_WORKOUT", payload: json });
+      }
+    } catch (err) {
+      setError("Could not connect to the server");
       setEmptyFields([]);
-      dispatch({ type: "CREATE_WORKOUT", payload: json });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -69,7 +78,7 @@ function WorkoutForm() {
         className={emptyFields.includes("reps") ? "error" : ""}
       />
 
-      <button>Add Workout</button>
+      <button disabled={isLoading}>{isLoading ? "Adding..." : "Add Workout"}</button>
 
       {error && <div className="error-message">{error}</div>}
     </form>
