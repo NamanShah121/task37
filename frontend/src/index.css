@@ -1,0 +1,131 @@
+:root {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #1d1d1d;
+  background: #f5f7f7;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #f5f7f7;
+}
+
+.app {
+  min-height: 100vh;
+  padding: 24px 14px;
+}
+
+.page {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+h1 {
+  margin: 0 0 22px;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.home {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.workout-details {
+  position: relative;
+  background: #fff;
+  border: 1px solid #d9dede;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  border-radius: 3px;
+  margin-bottom: 18px;
+  padding: 18px 48px 18px 18px;
+}
+
+.workout-details h4 {
+  margin: 0 0 10px;
+  font-size: 18px;
+  color: #1ea672;
+}
+
+.workout-details p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.created-text {
+  color: #666;
+  font-size: 13px;
+}
+
+.delete-btn {
+  position: absolute;
+  top: 18px;
+  right: 16px;
+  border: none;
+  background: #f1f3f3;
+  cursor: pointer;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+}
+
+.create-form {
+  background: #efefef;
+  padding: 18px;
+}
+
+.create-form h3 {
+  margin-top: 0;
+  font-size: 18px;
+}
+
+.create-form label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+}
+
+.create-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 14px;
+  border: 1px solid #cfcfcf;
+  background: #fff;
+}
+
+.create-form button {
+  border: none;
+  background: #1ea672;
+  color: white;
+  padding: 10px 14px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+input.error {
+  border: 1px solid #e7195a;
+}
+
+.error-message {
+  margin-top: 14px;
+  padding: 10px;
+  border: 1px solid #e7195a;
+  color: #e7195a;
+  background: #ffe6eb;
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .home {
+    grid-template-columns: 1fr;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+}
